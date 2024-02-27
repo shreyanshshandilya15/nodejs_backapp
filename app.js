@@ -21,7 +21,15 @@ app.use(cookieParser());
 app.use(
     cors({
     
-    origin:'*',
+    // origin:'*',
+    origin: function(origin, callback) {
+        // Allow requests from localhost:5173
+        if (!origin || origin === 'http://localhost:5173') {
+          callback(null, true);
+        } else {
+          callback(new Error('Not allowed by CORS'));
+        }
+      },
     methods:["GET","POST","PUT","DELETE"],
     credentials:true,
 }));
