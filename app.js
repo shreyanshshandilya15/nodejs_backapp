@@ -18,14 +18,14 @@ app.use(express.json());
 //middleware to access cookies data
 app.use(cookieParser());
 //middleware to use router
-app.use("/api/v1/users",userRoutes);
-app.use("/api/v1/task",taskRoutes);
 app.use(
     cors({
     origin:[process.env.FRONTEND_URL],
     methods:["GET","POST","PUT","DELETE"],
     credentials:true,
 }));
+app.use("/api/v1/users",userRoutes);
+app.use("/api/v1/task",taskRoutes);
 
 app.get("/",(req,res)=>{
     res.send("working");
