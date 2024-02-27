@@ -20,8 +20,8 @@ app.use(cookieParser());
 //middleware to use router
 app.use(
     cors({
-    origin:'https://localhost:5173',
-    // origin:[process.env.FRONTEND_URL],
+    
+    origin:[process.env.FRONTEND_URL],
     methods:["GET","POST","PUT","DELETE"],
     credentials:true,
 }));
