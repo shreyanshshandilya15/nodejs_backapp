@@ -17,7 +17,7 @@ export const login=async(req,res,next)=>{
         if(!isMatch)return next(new Errorhandler("Incorrect email or password",404));
         sendcookie(user,res,`Welcome Back, ${user.name}`,201);
       }catch(error){
-
+           next(error);
       }
 };
 
