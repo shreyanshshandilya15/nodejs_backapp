@@ -18,21 +18,24 @@ app.use(express.json());
 //middleware to access cookies data
 app.use(cookieParser());
 //middleware to use router
-app.use(
-    cors({
-    
-    // origin:'*',
-    origin: function(origin, callback) {
-        // Allow requests from localhost:5173
-        if (!origin || origin === 'http://localhost:5173') {
-          callback(null, true);
-        } else {
-          callback(new Error('Not allowed by CORS'));
-        }
-      },
-    methods:["GET","POST","PUT","DELETE"],
-    credentials:true,
-}));
+const allowedorigins=[
+    'http://localhost:5173',
+    'https://nodejs-todoapp-82rh.onrender.com'
+];
+
+const corsOptions = {
+    origin: function (origin, callback) {
+      // If the request origin is in the allowedOrigins list or if there's no origin (like in some tools)
+      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true // Enable sending of credentials (cookies, auth headers)
+};
+app.use(cors(corsOptions));
+
 
 app.use("/api/v1/users",userRoutes);
 app.use("/api/v1/task",taskRoutes);
