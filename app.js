@@ -18,6 +18,7 @@ app.use(express.json());
 //middleware to access cookies data
 app.use(cookieParser());
 //middleware to use router
+
 const allowedorigins=[
     'http://localhost:5173',
     'https://nodejs-todoapp-82rh.onrender.com'
@@ -26,7 +27,7 @@ const allowedorigins=[
 const corsOptions = {
     origin: function (origin, callback) {
       // If the request origin is in the allowedOrigins list or if there's no origin (like in some tools)
-      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      if (allowedorigins.indexOf(origin) !== -1 || !origin) {
         callback(null, true);
       } else {
         callback(new Error('Not allowed by CORS'));
