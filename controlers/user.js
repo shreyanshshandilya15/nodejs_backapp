@@ -5,7 +5,6 @@ import Jwt  from "jsonwebtoken";
 import { sendcookie } from "../utils/features.js";
 import Errorhandler from "../middlewares/error.js";
 
-
 export const login=async(req,res,next)=>{
       try{
         const {email,password}=req.body;
@@ -25,7 +24,7 @@ export const addNewUser=async (req,res,next)=>{
        try{
         const {name,email,password}=req.body;
         let user= await User.findOne({email});
-        if(user)return next(new Errorhandler("User already exists",400));
+        if(user)return next(new Errorhandler("User already exists",404));
        
         const hashedpassword=await bcrypt.hash(password,10);
         user=await User.create({name,email,password:hashedpassword});
@@ -36,14 +35,6 @@ export const addNewUser=async (req,res,next)=>{
        }
 };
 
-
-// export const specialfunc=(req,res)=>{
-//     res.status(200).json({
-//         success:true,
-//         message:"just joking !",
-//     });
-// };
-
 export const getmyprofile=(req,res)=>{
     //req.params is used when you are trying to Access data by putting data as input
     
@@ -53,16 +44,18 @@ export const getmyprofile=(req,res)=>{
         user:req.user,
     });    
 };
+
 export const logout=async(req,res)=>{
-    res.cookie("token","",{
+    res.status(200).cookie("","",{
         expires:new Date(Date.now()),
         samesite:process.env.NODE_ENV==="Development" ? "lax" :"none" ,
         secure: process.env.NODE_ENV=== "Development" ? false :true,
     }).json({
         success:true,
         user:req.user
-    });
+    }); 
 }
+
 export const updateUser=async (req,res)=>{
     //req.params is used when you are trying to Access data by putting data as input
     
@@ -79,6 +72,7 @@ export const updateUser=async (req,res)=>{
         message:"updated",
     });
 };
+
 export const deleteUser=async (req,res)=>{
     //req.params is used when you are trying to Access data by putting data as input
     
