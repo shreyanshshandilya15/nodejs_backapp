@@ -1,13 +1,9 @@
 import express from "express";
 import { 
-    // getAllUsers,
     addNewUser,
     getmyprofile,
     login,
     logout
-    // specialfunc, 
-    // deleteUser,
-    // updateUser
 } 
 from "../controlers/user.js";
 import { isAuthenticated } from "../middlewares/auth.js";
@@ -22,7 +18,8 @@ router.post("/login",login);
 // router.get("/userid/special",specialfunc);
 
 router.get("/me",isAuthenticated,getmyprofile);
-router.get("/logout",logout);
+router.get("/logout",isAuthenticated,logout);
+
 // router.route("/userid/:id").get(getUser);
 // .put(updateUser)
 // .delete(deleteUser)

@@ -33,10 +33,9 @@ export const addNewUser=async (req,res,next)=>{
        }catch(error){
         next(error);
        }
-};
+};  
 
 export const getmyprofile=(req,res)=>{
-    //req.params is used when you are trying to Access data by putting data as input
     
     // const user=await User.findById({id});
     res.status(200).json({
@@ -45,9 +44,10 @@ export const getmyprofile=(req,res)=>{
     });    
 };
 
-export const logout=async(req,res)=>{
-    res.status(200).cookie("","",{
+export const logout=(req,res)=>{
+    res.status(200).cookie("token","",{
         expires:new Date(Date.now()),
+        httpOnly:true,
         samesite:process.env.NODE_ENV==="Development" ? "lax" :"none" ,
         secure: process.env.NODE_ENV=== "Development" ? false :true,
     }).json({

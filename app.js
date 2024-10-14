@@ -37,7 +37,6 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-
 app.use("/api/v1/users",userRoutes);
 app.use("/api/v1/task",taskRoutes);
 

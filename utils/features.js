@@ -1,6 +1,6 @@
 import Jwt  from "jsonwebtoken";
 
-export const sendcookie= (user,res,message,statusCode=200)=>{
+export const sendcookie= (user,res,message,statusCode)=>{
     const token=Jwt.sign({_id:user._id},process.env.JWT_SECRET);
     res
     .status(statusCode)
