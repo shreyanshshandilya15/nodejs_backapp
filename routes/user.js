@@ -18,7 +18,7 @@ router.post("/login",login);
 // router.get("/userid/special",specialfunc);
 
 router.get("/me",isAuthenticated,getmyprofile);
-router.get("/logout",isAuthenticated,logout);
+router.get("/logout",logout);
 
 // router.route("/userid/:id").get(getUser);
 // .put(updateUser)
