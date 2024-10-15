@@ -37,7 +37,6 @@ export const addNewUser=async (req,res,next)=>{
 
 export const getmyprofile=(req,res)=>{
     
-    // const user=await User.findById({id});
     res.status(200).json({
         success:true,
         user:req.user,
